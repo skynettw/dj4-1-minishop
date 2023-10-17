@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %} 迷你電商 {% endblock %}
+{% block page-title %} 歡迎光臨~迷你電商~ {% endblock %}
+{% block main-content %}
+<div id="carouselExample" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{{ products.0.image.url }}" height=400px class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{{ products.2.image.url }}" height=400px class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{{ products.3.image.url }}" height=400px class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+<div class="row">
+    {% for item in products %}
+        <div class="col-3">
+            <div class="card mt-2 mb-2">
+                <img class="card-img-top" src="{{ item.image.url }}">
+                <div class="card-title">
+                    <h4>{{ item.name }}</h4>
+                </div>
+                <div class="card-body">
+                    {{ item.description }}
+                </div>
+                <div class="card-footer">
+                    {{ item.price }}
+                    <a class="btn btn-sm btn-primary">加入購物車</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

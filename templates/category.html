@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %} 迷你電商 {% endblock %}
+{% block page-title %} 商品目錄 -- {{ cate_name }} {% endblock %}
+{% block main-content %}
+<div class="row">
+    {% for item in products %}
+        <div class="col-3">
+            <div class="card mt-2 mb-2">
+                <img class="card-img-top" src="{{ item.image.url }}">
+                <div class="card-title">
+                    <h4>{{ item.name }}</h4>
+                </div>
+                <div class="card-body">
+                    {{ item.description }}
+                </div>
+                <div class="card-footer">
+                    {{ item.price }}
+                    <a class="btn btn-sm btn-primary">加入購物車</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
