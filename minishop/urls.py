@@ -9,6 +9,7 @@ urlpatterns = [
     path('category/', views.category),
     path('category/<int:id>/', views.category),
     path('admin/', admin.site.urls),
+    path('accounts/', include('registration.backends.default.urls')),
 ] 
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

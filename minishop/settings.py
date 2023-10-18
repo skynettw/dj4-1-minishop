@@ -31,13 +31,15 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'mysite.apps.MysiteConfig',
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mysite',
+    'anymail',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +126,23 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'anymail.backends.postmark.EmailBackend'
+ANYMAIL = {
+    "POSTMARK_SERVER_TOKEN": "a5ab96ba-03af-4056-b2ac-f76fab4de62f",
+}
+DEFAULT_FROM_EMAIL = "minhuang@nkust.edu.tw"  
+SERVER_EMAIL = "minhuang@nkust.edu.tw" 
+
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'  
+# EMAIL_PORT = 587  
+# EMAIL_USE_TLS = True  
+# EMAIL_HOST_USER = 'skynet.tw@gmail.com'
+# EMAIL_HOST_PASSWORD = '****'  
+
+
+
+
+ACCOUNT_ACTIVATION_DAYS = 7
