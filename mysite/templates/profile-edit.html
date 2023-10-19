@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block web-title %} 迷你電商 {% endblock %}
+{% block title %} 編輯個人資訊 {% endblock %}
+{% block content %}
+<div class="row">
+  <center>
+    <div class-"col-8 mx-auto" style="width:50rem;">
+      <table class="table table-striped">
+        <form action="." method="POST">
+          {% csrf_token %}
+          <tr>
+            <td>姓名：</td>
+            <td><input type=text name="name" 
+                       size=10 value="{{ user.last_name }}" required></td>
+          </tr>
+          <tr>
+            <td>地址：</td>
+            <td><input type=text name="address" 
+                       size=40 value="{{ profile.address }}" required></td>
+          </tr>
+          <tr>
+            <td>電話：</td>
+            <td><input type=text name="phone" 
+                       size=20 value="{{ profile.phone }}" required></td>
+          </tr>
+          <tr>
+            <td colspan=2>
+              <input type=submit class="btn btn-sm btn-primary" value="儲存">
+              <a href="/profile/" class="btn btn-sm btn-secondary">返回</a>
+            </td>
+          </tr>
+      </table>
+    </div>
+  </center>
+</div>
+{% endblock %}

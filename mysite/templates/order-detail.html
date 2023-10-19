@@ -14,20 +14,23 @@
   }
 </script>
 <div class="row">
-  訂單：{{ order.order_date }}<br>
-  處理狀態：<script>showName({{ order.status }})</script>
-  <table class="table table-striped">
-    <tr><th>商品名稱</th><th>訂購數量</th></tr>
-    {% for item in orderitems %}
-    <tr>
-      <td>{{ item.product }}</td>
-      <td>{{ item.qty }}</td>
-    </tr>
-    {% empty %}
-    <tr><td colspan=3>您目前沒有訂單</td></tr>
-    {% endfor %}
-  </table>
-  <a href="/accounts/profile/" class="btn btn-primary btn-sm">返回個人資訊</a>
-  
+  <center>
+  <div class-"col-8 mx-auto" style="width:50rem;">
+    訂單：{{ order.order_date }}<br>
+    處理狀態：<script>showName({{ order.status }})</script>
+    <table class="table table-striped">
+      <tr><th>商品名稱</th><th>訂購數量</th></tr>
+      {% for item in orderitems %}
+      <tr>
+        <td>{{ item.product }}</td>
+        <td>{{ item.qty }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan=3>您目前沒有訂單</td></tr>
+      {% endfor %}
+    </table>
+    <a href="/accounts/profile/" class="btn btn-primary btn-sm">返回個人資訊</a>
+  </div>
+</center>
 </div>
 {% endblock %}

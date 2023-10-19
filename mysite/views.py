@@ -107,6 +107,27 @@ def profile(request):
     return render(request, "profile.html", locals())
 
 @login_required(login_url="/accounts/login/")
+def profile_edit(request):
+    user = User.objects.get(username=request.user.username)
+    if request.method == "POST":
+        profile = Profile.objects.get(user=user)
+        name = request.POST.get("name")
+        address = request.POST.get("address")
+        phone = request.POST.get("phone")
+        user.last_name = name
+        profile.address = address
+        profile.phone = phone
+        user.save()
+        profile.save()
+        return redirect("/profile/")
+    try:
+        profile = Profile.objects.get(user=user)
+    except:
+        profile = Profile(user=user, address="未填", phone="未填")
+        profile.save()
+    return render(request, "profile-edit.html", locals())
+
+@login_required(login_url="/accounts/login/")
 def order_detail(request, id):
     user = User.objects.get(username=request.user.username)
     order = Order.objects.get(id=id)

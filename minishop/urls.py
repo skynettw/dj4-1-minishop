@@ -18,6 +18,7 @@ urlpatterns = [
     path('category/<int:id>/', views.category),
     path('admin/', admin.site.urls),
     path('profile/', views.profile),
+    path('profile/edit/', views.profile_edit),
     path('accounts/profile/', views.profile),
     path('accounts/', include('registration.backends.default.urls')),
 ] 
