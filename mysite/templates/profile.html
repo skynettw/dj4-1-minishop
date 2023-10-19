@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block web-title %} 迷你電商 {% endblock %}
+{% block title %} 個人資訊 {% endblock %}
+{% block content %}
+<script>
+  function showName(status_id) {
+    ORDER_STATUS = [
+    (0, "未付款"), 
+    (1, "已付款，處理中"),
+    (2, "已寄送"), 
+    (3, "訂單完成")
+    ];
+    document.write(ORDER_STATUS[status_id]);
+  }
+</script>
+<div class="row">
+  姓名：{{ user.last_name }} {{ user.first_name }} <br>
+  地址：{{ profile.address }} <br>
+  電話：{{ profile.phone }} <br>
+  <table class="table table-striped">
+    <tr><th>訂單日期</th><th>處理狀態</th><th>備註</th></tr>
+    {% for order in orders %}
+    <tr>
+      <td>
+        <a href="/order/detail/{{ order.id }}/">{{order.order_date}}</a></td>
+      <td><script>showName({{order.status}})</script></td>
+      <td>{{order.memo}}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan=3>您目前沒有訂單</td></tr>
+    {% endfor %}
+  </table>
+  <a href="/category/" class="btn btn-primary btn-sm">前往購物</a>
+</div>
+{% endblock %}

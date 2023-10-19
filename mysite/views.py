@@ -34,16 +34,31 @@ def cart_add(request, id):
     return redirect("/category/")
 
 @login_required(login_url="/accounts/login/")
+def cart_increment(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.add(product=product)
+    return redirect("/cart/")
+
+@login_required(login_url="/accounts/login/")
+def cart_decrement(request, id):
+    try:
+        cart = Cart(request)
+        product = Product.objects.get(id=id)
+        cart.decrement(product=product)
+    except:
+        pass
+    return redirect("/cart/")
+
+@login_required(login_url="/accounts/login/")
 def cart(request):
-    plist = list()
+    total = 0
     for k, v in request.session["cart"].items():
-        item = dict()
-        item[k] = v
-        plist.append(item)
+        total += float(v["price"]) * float(v["quantity"])
     return render(request, "cart.html", locals())
 
 @login_required(login_url="/accounts/login/")
-def cart_remove(request):
+def cart_remove(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
     cart.remove(product=product)
@@ -54,3 +69,46 @@ def cart_clear(request):
     cart = Cart(request)
     cart.clear()
     return redirect("/cart/")
+
+@login_required(login_url="/accounts/login/")
+def order(request):
+    cart = Cart(request)
+    total = 0
+    try:
+        user = User.objects.get(username=request.user.username)
+        new_order = Order(user=user)
+        new_order.save()
+        for k, v in request.session["cart"].items():
+            product = Product.objects.get(id=v["product_id"])
+            qty = v['quantity']
+            order_item = OrderItem(
+                order = new_order,
+                product = product,
+                qty = qty
+            )
+            order_item.save()
+            total += float(v["price"]) * float(v["quantity"])
+        cart.clear()
+        messages.add_message(request, messages.SUCCESS, "訂單成功")        
+    except Exception as e:
+        messages.add_message(request, messages.ERROR, "下訂失敗")
+        print(e)
+    return redirect("/cart/")
+
+@login_required(login_url="/accounts/login/")
+def profile(request):
+    user = User.objects.get(username=request.user.username)
+    try:
+        profile = Profile.objects.get(user=user)
+    except:
+        profile = Profile(user=user, address="未填", phone="未填")
+        profile.save()
+    orders = Order.objects.filter(user=user)
+    return render(request, "profile.html", locals())
+
+@login_required(login_url="/accounts/login/")
+def order_detail(request, id):
+    user = User.objects.get(username=request.user.username)
+    order = Order.objects.get(id=id)
+    orderitems = OrderItem.objects.filter(order=order)
+    return render(request, "order-detail.html", locals())

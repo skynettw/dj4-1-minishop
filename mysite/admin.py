@@ -19,7 +19,7 @@ class PhotoAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['no', 'user', 'order_date', 'status', 'memo']
+    list_display = ['user', 'order_date', 'status', 'memo']
 
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):

@@ -38,17 +38,16 @@ ORDER_STATUS = [
     (3, "訂單完成")
 ]
 class Order(models.Model):
-    no = models.CharField(max_length=10)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     order_date = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(default=0, choices=ORDER_STATUS)
     memo = models.TextField(default="")
     def __str__(self):
-        return self.no
+        return str(self.order_date)
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     qty = models.IntegerField(default=1)
     def __str__(self):
-        return str(self.order, self.product)
+        return str(self.product)

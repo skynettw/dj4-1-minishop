@@ -6,14 +6,19 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index),
+    path('order/', views.order, name="order"),
+    path('order/detail/<int:id>/', views.order_detail),
     path('cart/', views.cart, name='cart'),
-    path('cart/remove/<int:id>', views.cart_remove, name="cart_remove"),
+    path('cart/remove/<int:id>/', views.cart_remove, name="cart_remove"),
     path('cart/add/<int:id>/', views.cart_add, name='cart_add'),
+    path('cart/increment/<int:id>/', views.cart_increment, name='increment'),
+    path('cart/decrement/<int:id>/', views.cart_decrement, name='decrement'),
     path('cart/clear/', views.cart_clear, name='cart_clear'),
     path('category/', views.category),
     path('category/<int:id>/', views.category),
     path('admin/', admin.site.urls),
-    path('accounts/profile/', views.index),
+    path('profile/', views.profile),
+    path('accounts/profile/', views.profile),
     path('accounts/', include('registration.backends.default.urls')),
 ] 
 
