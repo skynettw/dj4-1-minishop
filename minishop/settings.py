@@ -142,7 +142,5 @@ SERVER_EMAIL = "minhuang@nkust.edu.tw"
 # EMAIL_HOST_USER = 'skynet.tw@gmail.com'
 # EMAIL_HOST_PASSWORD = '****'  
 
-
-
-
 ACCOUNT_ACTIVATION_DAYS = 7
+CART_SESSION_ID = 'cart'

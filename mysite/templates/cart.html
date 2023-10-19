@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% comment %} {% load cart_tag %} {% endcomment %}
+{% block web-title %} 我的購物車 {% endblock %}
+{% block title %} 我的購物車 {% endblock %}
+{% block content %}
+
+
+Total Length :: {{request.session.cart|length}}
+<br>
+Cart Detail:
+
+{{ plist }}
+<table class="table table-striped">
+    <tr><th>商品名稱</th><th>數量</th><th>價格</th><th>照片</th></tr>
+    {% for p in plist %}
+        <tr>
+            <td> {{ p.1.name }}</td>
+            <td> {{ p.1.quantity }}</td>
+            <td> {{ p.1.price }}</td>
+            <td><a href="{{ p.image }}">商品照片</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}
