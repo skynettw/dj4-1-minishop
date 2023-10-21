@@ -131,7 +131,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'anymail.backends.postmark.EmailBackend'
 ANYMAIL = {
-    "POSTMARK_SERVER_TOKEN": "a5ab96ba-03af-4056-b2ac-f76fab4de62f",
+    "POSTMARK_SERVER_TOKEN": "****",
 }
 DEFAULT_FROM_EMAIL = "minhuang@nkust.edu.tw"  
 SERVER_EMAIL = "minhuang@nkust.edu.tw" 
